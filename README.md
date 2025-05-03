@@ -99,6 +99,10 @@
 * ⚠️ **Safari** – Limited support for speech recognition
 
 ---
+# Photos from the Hackathon
+https://github.com/Deban-H/MIT-AI-Hackathon/blob/main/track1and-itsChallanges.jpg
+https://github.com/Deban-H/MIT-AI-Hackathon/blob/main/Photo1-SpeakersSession-fromTheHackathon.png
+https://github.com/Deban-H/MIT-AI-Hackathon/blob/main/Photo2-fromTheHackathon.png
 
 ## 🔐 Privacy Notice
 
