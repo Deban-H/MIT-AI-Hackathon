@@ -101,7 +101,9 @@
 ---
 # Photos from the Hackathon
 i. https://github.com/Deban-H/MIT-AI-Hackathon/blob/main/track1and-itsChallanges.jpg
+
 ii. https://github.com/Deban-H/MIT-AI-Hackathon/blob/main/Photo1-SpeakersSession-fromTheHackathon.png
+
 iii. https://github.com/Deban-H/MIT-AI-Hackathon/blob/main/Photo2-fromTheHackathon.png
 
 ## 🔐 Privacy Notice
