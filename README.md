@@ -76,7 +76,9 @@
 * collected data section is initially empty. It fetches data when information is given on the given two boxes.
 * user can save or export all the collected datas to csv by clicking "export csv".
 * Lastly, There is an AI agent (scroll down to find the agent) in order to help users and answer to their queries.
-         #sample questions you can ask the ai agent:
+  
+  ---
+ #sample questions you can ask the ai agent:
 * 1."How much to move a 3-bedroom house from Austin to Denver?"
 * 2. "What's the average cost for moving cross-country?"
 * 3. "Is it cheaper to move in winter?"
