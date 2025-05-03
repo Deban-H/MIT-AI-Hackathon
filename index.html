@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MovePricer AI Agent</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <style>
+    :root {
+      --primary: #00ff88;
+      --secondary: #ff6b35;
+      --dark: #0a0a0a;
+      --text: #e0e0e0;
+    }
+
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      padding: 2rem 0;
+      border-bottom: 2px solid var(--primary);
+    }
+
+    .agent-panel {
+      background: #1a1a1a;
+      padding: 2rem;
+      border-radius: 10px;
+      margin: 2rem 0;
+    }
+
+    .input-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .voice-input {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    input, select {
+      flex: 1;
+      padding: 0.8rem;
+      background: #2a2a2a;
+      border: 1px solid #3a3a3a;
+      color: var(--text);
+      border-radius: 5px;
+    }
+
+    .mic-btn {
+      background: var(--secondary);
+      border: none;
+      padding: 0.8rem;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .mic-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .action-btn {
+      background: var(--primary);
+      color: var(--dark);
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+
+    .dataset-preview {
+      background: #1a1a1a;
+      padding: 1rem;
+      border-radius: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th, td {
+      padding: 0.8rem;
+      text-align: left;
+      border-bottom: 1px solid #3a3a3a;
+    }
+
+    th {
+      color: var(--primary);
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .chatbox {
+      background: #1a1a1a;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-top: 2rem;
+    }
+
+    .chat-messages {
+      max-height: 200px;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+    }
+
+    .chat-input {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .chat-input input {
+      flex: 1;
+    }
+
+    .chat-message {
+      margin-bottom: 0.5rem;
+    }
+
+    .chat-message.user {
+      color: var(--secondary);
+    }
+
+    .chat-message.ai {
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1><i class="fas fa-truck-moving"></i> MovePricer AI Agent</h1>
+      <p>Voice-Enabled Moving Price Intelligence</p>
+    </div>
+
+    <div class="agent-panel">
+      <h2><i class="fas fa-robot"></i> Automated Agent</h2>
+
+      <div class="input-group">
+        <label>Moving Route</label>
+        <div class="voice-input">
+          <input type="text" id="route" placeholder="Boston → San Francisco">
+          <button class="mic-btn" onclick="startVoiceInput('route')">
+            <i class="fas fa-microphone"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Company Contact</label>
+        <div class="voice-input">
+          <input type="tel" id="phone" placeholder="+1 234 567 890">
+          <button class="mic-btn" onclick="startVoiceInput('phone')">
+            <i class="fas fa-microphone"></i>
+          </button>
+        </div>
+      </div>
+
+      <button class="action-btn" onclick="simulateCall()">
+        <i class="fas fa-play"></i> Start Price Discovery
+      </button>
+    </div>
+
+    <div class="dataset-preview">
+      <h3><i class="fas fa-database"></i> Collected Data</h3>
+      <div class="toolbar">
+        <button class="action-btn" onclick="exportCSV()">
+          <i class="fas fa-file-csv"></i> Export CSV
+        </button>
+        <button class="action-btn" onclick="clearData()">
+          <i class="fas fa-trash"></i> Clear Data
+        </button>
+      </div>
+      <table id="dataset">
+        <thead>
+          <tr>
+            <th>Route</th>
+            <th>Company</th>
+            <th>Price</th>
+            <th>Services</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="datasetBody">
+        </tbody>
+      </table>
+    </div>
+
+    <div class="chatbox">
+      <h3><i class="fas fa-comments"></i> Talk to AI</h3>
+      <div class="chat-messages" id="chatMessages"></div>
+      <div class="chat-input">
+        <input type="text" id="chatInput" placeholder="Type your message...">
+        <button class="mic-btn" onclick="startVoiceChat()">
+          <i class="fas fa-microphone"></i>
+        </button>
+        <button class="action-btn" onclick="sendMessage()">
+          Send
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Voice Recognition
+    let recognition;
+    let activeInput;
+
+    function startVoiceInput(inputId) {
+      activeInput = document.getElementById(inputId);
+      recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = 'en-US';
+
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        activeInput.value = transcript;
+      }
+
+      recognition.start();
+    }
+
+    // Data Simulation
+    const companies = ['QuickMovers', 'CityTransit', 'SafeHaul', 'BudgetMovers'];
+    const services = ['Packing', 'Loading', 'Insurance', 'Storage'];
+
+    function simulateCall() {
+      const route = document.getElementById('route').value;
+      const phone = document.getElementById('phone').value;
+
+      // Generate mock data
+      const mockData = {
+        route: route || 'Boston → SF',
+        company: companies[Math.floor(Math.random() * companies.length)],
+        price: Math.floor(Math.random() * 5000) + 1000,
+        services: services.sort(() => 0.5 - Math.random()).slice(0, 2),
+        date: new Date().toLocaleString()
+      };
+
+      addToDataset(mockData);
+      speak(`For the route ${mockData.route}, the company ${mockData.company} offers services including ${mockData.services.join(' and ')} at a price of $${mockData.price}.`);
+    }
+
+    // Dataset Management
+    function addToDataset(data) {
+      const tbody = document.getElementById('datasetBody');
+      const row = document.createElement('tr');
+
+      row.innerHTML = `
+        <td>${data.route}</td>
+        <td>${data.company}</td>
+        <td>$${data.price}</td>
+        <td>${data.services.join(', ')}</td>
+        <td>${data.date}</td>
+      `;
+
+      tbody.appendChild(row);
+      saveToLocalStorage();
+    }
+
+    function saveToLocalStorage() {
+      const rows = Array.from(document.querySelectorAll('#datasetBody tr'));
+      const data = rows.map(row => ({
+        route: row.cells[0].textContent,
+        company: row.cells[1].textContent,
+        price: row.cells[2].textContent,
+        services: row.cells[3].textContent.split(', '),
+        date: row.cells[4].textContent
+      }));
+
+      localStorage.setItem('movingData', JSON.stringify(data));
+    }
+
+    function loadFromLocalStorage() {
+      const data = JSON.parse(localStorage.getItem('movingData')) || [];
+      data.forEach(addToDataset);
+    }
+
+    function exportCSV() {
+      const rows = Array.from(document.querySelectorAll('#datasetBody tr'));
+      let csvContent = "data:text/csv;charset=utf-8,";
+
+      csvContent += "Route,Company,Price,Services,Date\n";
+      rows.forEach(row => {
+        const cells = Array.from(row.cells).map(cell =>
+          `"${cell.textContent.replace(/"/g, '""')}"`
+        );
+        csvContent += cells.join(',') + "\n";
+      });
+
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', 'moving_prices.csv');
+      document.body.appendChild(link);
+      link.click();
+    }
+
+    function clearData() {
+      localStorage.removeItem('moving ::contentReference[oaicite:0]{index=0}')
+
+      localStorage.removeItem('movingData');
+      document.getElementById('datasetBody').innerHTML = '';
+    }
+
+    // AI Voice Chat
+    function startVoiceChat() {
+      recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = 'en-US';
+
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById('chatInput').value = transcript;
+        sendMessage();
+      }
+
+      recognition.start();
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const message = input.value.trim();
+      if (!message) return;
+
+      addChat('user', message);
+      input.value = '';
+
+      // Simple AI response logic
+      let response = generateAIResponse(message);
+      addChat('ai', response);
+      speak(response);
+    }
+
+    function addChat(sender, message) {
+      const chatBox = document.getElementById('chatMessages');
+      const div = document.createElement('div');
+      div.className = `chat-message ${sender}`;
+      div.textContent = `${sender === 'user' ? 'You' : 'AI'}: ${message}`;
+      chatBox.appendChild(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function generateAIResponse(msg) {
+    msg = msg.toLowerCase();
+
+    // Handle inappropriate content first
+    const inappropriateWords = ['stupid', 'idiot', 'hate', 'suck', 'bad', 'shit', 'fuck'];
+    if (inappropriateWords.some(word => msg.includes(word))) {
+        return "I'm here to help with moving-related queries. Let's keep our conversation respectful and focused on your moving needs.";
+    }
+
+    // Handle non-moving related queries
+    const unrelatedTopics = ['food', 'school', 'restaurant', 'hotel', 'shopping', 'weather'];
+    if (unrelatedTopics.some(topic => msg.includes(topic))) {
+        return "I specialize in moving services! I can help with:\n" +
+               "• Moving cost estimates\n" +
+               "• Route comparisons\n" +
+               "• Service packages\n" +
+               "• Delivery timelines\n" +
+               "How can I assist with your move today?";
+    }
+
+    // Main conversation flow
+    if (msg.includes("hello") || msg.includes("hi") || msg.includes("hey")) {
+        const greetings = [
+            "Hello! Ready to make your move stress-free?",
+            "Hi there! Let's find you the best moving options.",
+            "Hey! How can I assist with your relocation today?"
+        ];
+        return greetings[Math.floor(Math.random() * greetings.length)];
+    }
+
+    if (msg.includes("thank") || msg.includes("appreciate")) {
+        return "You're welcome! Happy to help with your moving needs. 😊";
+    }
+
+    if (msg.includes("price") || msg.includes("cost") || msg.includes("expensive")) {
+        const priceResponses = [
+            "Moving costs typically range between $1500-$8000 depending on:\n" +
+            "• Distance\n• Home size\n• Additional services\n" +
+            "Want a personalized estimate? Just share your route and home size!",
+
+            "For a 2-bedroom move:\n" +
+            "Local: $1000-$3000\n" +
+            "Cross-country: $4000-$8000\n" +
+            "Need help comparing specific quotes?"
+        ];
+        return priceResponses[Math.floor(Math.random() * priceResponses.length)];
+    }
+
+    if (msg.includes("service") || msg.includes("package") || msg.includes("include")) {
+        return "We offer:\n" +
+               "🔹 Full Packing Service ($500-$2000)\n" +
+               "🔹 Fragile Item Handling ($200-$800)\n" +
+               "🔹 Temporary Storage ($100/month)\n" +
+               "🔹 Vehicle Transportation ($500-$1500)\n" +
+               "Which services are you interested in?";
+    }
+
+    if (msg.includes("time") || msg.includes("long") || msg.includes("delivery")) {
+        return "Delivery timelines vary:\n" +
+               "• Same State: 1-3 days\n" +
+               "• Cross-Country: 7-14 days\n" +
+               "Need expedited service? We offer 25% faster options!";
+    }
+
+    // Fallback response
+    const fallbacks = [
+        "I specialize in moving logistics! Ask me about:\n" +
+        "• Route comparisons\n• Cost estimates\n• Service packages",
+
+        "Let's focus on your move! I can help with:\n" +
+        "• Getting multiple quotes\n• Service customization\n• Delivery tracking",
+
+        "Want me to compare moving companies?\n" +
+        "Just share your route and home size!"
+    ];
+
+    return fallbacks[Math.floor(Math.random() * fallbacks.length)];
+}
+
+    function speak(text) {
+      const synth = window.speechSynthesis;
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'en-US';
+      utter.pitch = 1;
+      utter.rate = 1;
+      synth.speak(utter);
+    }
+
+    // Load saved dataset on start
+    window.onload = loadFromLocalStorage;
+  </script>
+</body>
+</html>
