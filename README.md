@@ -70,21 +70,21 @@
 * **CSV Export** – Downloadable quote table
 
 # HOW IT WORKS:
-*There are 2 boxes(for moving route and contact no) fill the boxes either by using the microphone or the text box.
-*click on "start price discovery" .
-*scroll down to see the result in the collected data section. 
-*collected data section is initially empty. It fetches data when information is given on the given two boxes.
-*user can save or export all the collected datas to csv by clicking "export csv".
-*Lastly, There is an AI agent (scroll down to find the agent) in order to help users and answer to their queries.
+* There are 2 boxes(for moving route and contact no) fill the boxes either by using the microphone or the text box.
+* click on "start price discovery" .
+* scroll down to see the result in the collected data section. 
+* collected data section is initially empty. It fetches data when information is given on the given two boxes.
+* user can save or export all the collected datas to csv by clicking "export csv".
+* Lastly, There is an AI agent (scroll down to find the agent) in order to help users and answer to their queries.
          #sample questions you can ask the ai agent:
-1."How much to move a 3-bedroom house from Austin to Denver?"
-2. "What's the average cost for moving cross-country?"
-3. "Is it cheaper to move in winter?"
-4. "What's the best pizza in Chicago?"
-5. "What's tomorrow's weather forecast?"
-6. "How long from NYC to LA?"
-7. "What's your fastest delivery option?"
-8."what is the cost from Chicago to Nyc"
+* 1."How much to move a 3-bedroom house from Austin to Denver?"
+* 2. "What's the average cost for moving cross-country?"
+* 3. "Is it cheaper to move in winter?"
+* 4. "What's the best pizza in Chicago?"
+* 5. "What's tomorrow's weather forecast?"
+* 6. "How long from NYC to LA?"
+* 7. "What's your fastest delivery option?"
+* 8."what is the cost from Chicago to Nyc"
 The link to the webpage is given below at 'live demo'
 ---
 ## LIVE DEMO: https://mit-ai-hackathon-aivoiceagent.netlify.app/
