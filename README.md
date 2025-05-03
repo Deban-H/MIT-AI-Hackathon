@@ -64,9 +64,11 @@
 * **HTML, CSS, JavaScript**
 * **AssemblyAI** – Speech-to-text
 * **Groq Cloud** – AI language model inference
+* **PYTHON 3.13** - BACKEND
 * **Web Speech API** – Voice synthesis (Text-to-Speech)
 * **LocalStorage** – Client-side data persistence
 * **CSV Export** – Downloadable quote table
+
 
 ---
 ## LIVE DEMO:
