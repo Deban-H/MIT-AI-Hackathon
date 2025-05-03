@@ -79,15 +79,16 @@
   
   ---
  #sample questions you can ask the ai agent:
-* 1."How much to move a 3-bedroom house from Austin to Denver?"
+* i."How much to move a 3-bedroom house from Austin to Denver?"
 * 2. "What's the average cost for moving cross-country?"
 * 3. "Is it cheaper to move in winter?"
 * 4. "What's the best pizza in Chicago?"
 * 5. "What's tomorrow's weather forecast?"
 * 6. "How long from NYC to LA?"
 * 7. "What's your fastest delivery option?"
-* 8."what is the cost from Chicago to Nyc"
-The link to the webpage is given below at 'live demo'
+* viii."what is the cost from Chicago to Nyc".
+
+ The link to the webpage is given below at 'live demo'
 ---
 ## LIVE DEMO: https://mit-ai-hackathon-aivoiceagent.netlify.app/
 
