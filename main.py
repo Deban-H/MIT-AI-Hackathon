@@ -7,17 +7,15 @@ from dotenv import load_dotenv
 import assemblyai as aai
 from groq import Groq
 
-# Initialize Flask app
 app = Flask(__name__)
 
-# Load environment variables
 load_dotenv()
 aai.settings.api_key = os.getenv("ASSEMBLYAI_API_KEY")
 
 
 class MovingPriceAgent:
     def __init__(self):
-        self.groq = Groq()  # Auto-loads GROQ_API_KEY from .env
+        self.groq = Groq()  
         self.dataset = pd.DataFrame(columns=[
             'company', 'route', 'cost', 'services',
             'delivery_days', 'flexibility', 'timestamp'
@@ -83,16 +81,10 @@ class MovingPriceAgent:
             return []
         return self.dataset[self.dataset['route'] == route]
 
-
-# Initialize agent
 agent = MovingPriceAgent()
-
-
 @app.route('/')
 def home():
     return render_template('index.html')
-
-
 @app.route('/get_quote', methods=['POST'])
 def get_quote():
     route = request.form['route']
