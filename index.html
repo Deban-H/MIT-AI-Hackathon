@@ -229,7 +229,7 @@
   </div>
 
   <script>
-    // Voice Recognition
+    
     let recognition;
     let activeInput;
 
@@ -246,7 +246,7 @@
       recognition.start();
     }
 
-    // Data Simulation
+    
     const companies = ['QuickMovers', 'CityTransit', 'SafeHaul', 'BudgetMovers'];
     const services = ['Packing', 'Loading', 'Insurance', 'Storage'];
 
@@ -254,7 +254,7 @@
       const route = document.getElementById('route').value;
       const phone = document.getElementById('phone').value;
 
-      // Generate mock data
+      
       const mockData = {
         route: route || 'Boston → SF',
         company: companies[Math.floor(Math.random() * companies.length)],
@@ -267,7 +267,7 @@
       speak(`For the route ${mockData.route}, the company ${mockData.company} offers services including ${mockData.services.join(' and ')} at a price of $${mockData.price}.`);
     }
 
-    // Dataset Management
+    
     function addToDataset(data) {
       const tbody = document.getElementById('datasetBody');
       const row = document.createElement('tr');
@@ -329,7 +329,7 @@
       document.getElementById('datasetBody').innerHTML = '';
     }
 
-    // AI Voice Chat
+  
     function startVoiceChat() {
       recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
       recognition.lang = 'en-US';
@@ -351,7 +351,7 @@
       addChat('user', message);
       input.value = '';
 
-      // Simple AI response logic
+    
       let response = generateAIResponse(message);
       addChat('ai', response);
       speak(response);
@@ -369,13 +369,12 @@
     function generateAIResponse(msg) {
     msg = msg.toLowerCase();
 
-    // Handle inappropriate content first
+    
     const inappropriateWords = ['stupid', 'idiot', 'hate', 'suck', 'bad', 'shit', 'fuck'];
     if (inappropriateWords.some(word => msg.includes(word))) {
         return "I'm here to help with moving-related queries. Let's keep our conversation respectful and focused on your moving needs.";
     }
 
-    // Handle non-moving related queries
     const unrelatedTopics = ['food', 'school', 'restaurant', 'hotel', 'shopping', 'weather'];
     if (unrelatedTopics.some(topic => msg.includes(topic))) {
         return "I specialize in moving services! I can help with:\n" +
@@ -386,7 +385,7 @@
                "How can I assist with your move today?";
     }
 
-    // Main conversation flow
+    
     if (msg.includes("hello") || msg.includes("hi") || msg.includes("hey")) {
         const greetings = [
             "Hello! Ready to make your move stress-free?",
@@ -430,7 +429,7 @@
                "Need expedited service? We offer 25% faster options!";
     }
 
-    // Fallback response
+    
     const fallbacks = [
         "I specialize in moving logistics! Ask me about:\n" +
         "• Route comparisons\n• Cost estimates\n• Service packages",
@@ -454,7 +453,7 @@
       synth.speak(utter);
     }
 
-    // Load saved dataset on start
+    
     window.onload = loadFromLocalStorage;
   </script>
 </body>
