@@ -5,13 +5,13 @@
 
 ---
 
-# 🚚 MovePricer – AI-Powered Voice Assistant for Moving Estimates
+# MovePricer – AI-Powered Voice Assistant for Moving Estimates
 
-**MovePricer** is a cutting-edge, voice-enabled web platform that acts as your personal moving assistant. It allows users to speak or type queries, gather quotes from vendors, and generate a structured dataset for easy price comparison—all in real time.
+**MovePricer** is a voice-enabled web platform that acts as your personal moving assistant. It allows users to speak or type queries, gather quotes from vendors, and generate a structured dataset for easy price comparison—all in real time.
 
 ## Features
 
-### 🎙️ Voice/Text Agent for Data Collection
+### Voice/Text Agent for Data Collection
 
 * Interact with the AI through **voice or text** using your browser.
 * AI prompts users to provide:
@@ -23,7 +23,7 @@
 * Uses **AssemblyAI** for transcription and **Groq Cloud** for lightning-fast language responses.
 * Stores, transcribes, and processes voice input to extract useful quote data.
 
-### 📊 Structured Price Comparison Dataset
+### Structured Price Comparison Dataset
 
 * Automatically normalizes company responses into a clean, exportable dataset.
 * Stores variables like:
@@ -35,7 +35,7 @@
   * `Response Timestamp`
 * Enables real-time generation of quote lists for comparison.
 
-### 🖥️ Interactive Comparison UI
+### Interactive Comparison UI
 
 * Sleek interface to:
 
@@ -44,7 +44,7 @@
   * Simulate new requests with updated cities or requirements
 * Export data to CSV for external analysis or client presentation.
 
-### 🧠 Smart AI Agent
+### Smart AI Agent
 
 * AI responds both **visually** and **verbally** with natural, spoken replies.
 * Conversational interface lets you ask:
@@ -54,12 +54,12 @@
   * “Can I move on the weekend?”
 * All replies are spoken aloud and displayed in a chat window.
 
-### 💾 Data Persistence
+### Data Persistence
 
 * Uses `localStorage` to remember conversations and results.
 * Option to export dataset or clear session data at any time.
 
-### ⚙️ Tech Stack
+### Tech Stack
 
 * **HTML, CSS, JavaScript**
 * **AssemblyAI** – Speech-to-text
@@ -92,11 +92,11 @@
 ---
 ## LIVE DEMO: https://mit-ai-hackathon-aivoiceagent.netlify.app/
 
-## 📌 Browser Support
+##  Browser Support
 
-* ✅ **Firefox** – Microphone permissions must be manually enabled
-* ✅ **Chrome** – Microphone permissions must be manually enabled
-* ⚠️ **Safari** – Limited support for speech recognition
+* **Firefox** – Microphone permissions must be manually enabled
+* **Chrome** – Microphone permissions must be manually enabled
+* **Safari** – Limited support for speech recognition
 
 ---
 # Photos from the Hackathon
@@ -106,7 +106,7 @@ ii. https://github.com/Deban-H/MIT-AI-Hackathon/blob/main/Photo1-SpeakersSession
 
 iii. https://github.com/Deban-H/MIT-AI-Hackathon/blob/main/Photo2-fromTheHackathon.png
 
-## 🔐 Privacy Notice
+## Privacy Notice
 
 This project is for demonstration purposes. No real user data is sent to vendors. All inputs are simulated and handled client-side.
 
